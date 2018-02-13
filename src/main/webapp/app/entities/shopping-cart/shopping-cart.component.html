@@ -1,0 +1,43 @@
+<div>
+    <h2>
+        <span>Shopping Cart</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="shoppingCarts && shoppingCarts.length > 0">
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th><span>Product Name</span></th>
+                    <th><span>Quantity</span></th>
+                    <th><span>Total Price</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let shoppingCart of shoppingCarts;">
+                    <th scope="row">
+                        <div *ngIf="shoppingCart.product">
+                            <a [routerLink]="['../product', shoppingCart.product?.id ]" >{{shoppingCart.product?.name}}</a>
+                        </div>
+                    </th>
+                    <td>{{shoppingCart.quantity}}</td>
+                    <td>{{shoppingCart.price}} €</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'shopping-cart/'+ shoppingCart.id + '/delete'} }]"
+                            replaceUrl="true"
+                            class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2>Sum Total = {{ getSumPrice() }} €</h2>
+</div>

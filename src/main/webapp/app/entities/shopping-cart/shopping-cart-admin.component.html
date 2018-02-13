@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span>Shopping Carts</span>
+        <button class="btn btn-primary float-right jh-create-entity create-shopping-cart" [routerLink]="['/', { outlets: { popup: ['shopping-cart-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Shopping Cart
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="shoppingCarts">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Quantity</span></th>
+            <th><span>Price</span></th>
+            <th><span>Purchase Order</span></th>
+            <th><span>Product</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let shoppingCart of shoppingCarts ;trackBy: trackId">
+                <td><a [routerLink]="['../shopping-cart', shoppingCart.id ]">{{shoppingCart.id}}</a></td>
+                <td>{{shoppingCart.quantity}}</td>
+                <td>{{shoppingCart.price}}</td>
+                <td>
+                    <div *ngIf="shoppingCart.purchaseOrder">
+                        <a [routerLink]="['../purchase-order', shoppingCart.purchaseOrder?.id ]" >{{shoppingCart.purchaseOrder?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="shoppingCart.product">
+                        <a [routerLink]="['../product', shoppingCart.product?.id ]" >{{shoppingCart.product?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../shopping-cart', shoppingCart.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'shopping-cart/'+ shoppingCart.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'shopping-cart/'+ shoppingCart.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

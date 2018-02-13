@@ -1,0 +1,60 @@
+<div>
+    <h2>
+        <span>Purchase Orders</span>
+        <button class="btn btn-primary float-right jh-create-entity create-purchase-order" [routerLink]="['/', { outlets: { popup: ['purchase-order-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Purchase Order
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="purchaseOrders">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Order Date</span></th>
+            <th><span>User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let purchaseOrder of purchaseOrders ;trackBy: trackId">
+                <td><a [routerLink]="['../purchase-order', purchaseOrder.id ]">{{purchaseOrder.id}}</a></td>
+                <td>{{purchaseOrder.order_date | date:'mediumDate'}}</td>
+                <td>
+                    {{purchaseOrder.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../purchase-order', purchaseOrder.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'purchase-order/'+ purchaseOrder.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'purchase-order/'+ purchaseOrder.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

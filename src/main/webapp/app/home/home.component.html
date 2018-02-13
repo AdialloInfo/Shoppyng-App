@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-9">
+        <h1 class="display-4">Welcome to the Shoppyng App!</h1>
+        <p class="lead">This is your homepage</p>
+    </div>
+</div>
+<div class="row" *ngIf ="products">
+    <div *ngFor="let product of products" class="col-sm-3 card-deck">
+        <div class="card" style="margin-bottom: 20px;">
+            <a><img class="card-img-top" src="../../content/images/not-found.png" height="310" width="310" alt="Card image cap"></a>
+            <div class="card-body">
+                <h4 class="card-title">{{product.name}} ({{product.price}} €)</h4>
+                <p class="card-text">{{product.description | slice:0:150}} ...</p>
+            </div>
+            <div class="card-footer">
+                <form name="addCartForm" role="form" novalidate (ngSubmit)="addToCart(product, quantity.value)">
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-3 col-form-label">Quantity</label>
+                        <div class="col-3">
+                            <!-- A optimiser -->
+                            <select #quantity name="quantity" class="form-control" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <span class="fa fa-cart-plus"></span>&nbsp;Add to shopping cart
+                    </button>
+                </form>               
+            </div>
+        </div>
+    </div>
+</div>

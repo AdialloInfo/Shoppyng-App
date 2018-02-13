@@ -1,0 +1,25 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "purchaseOrder"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "order_date",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180211070325",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "purchase_order",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

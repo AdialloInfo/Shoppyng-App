@@ -1,0 +1,49 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myShoppingCartLabel">Create or edit a Shopping Cart</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!shoppingCart.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="shoppingCart.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                [(ngModel)]="shoppingCart.quantity"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                [(ngModel)]="shoppingCart.price"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_purchaseOrder">Purchase Order</label>
+            <select class="form-control" id="field_purchaseOrder" name="purchaseOrder" [(ngModel)]="shoppingCart.purchaseOrder">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="purchaseOrderOption.id === shoppingCart.purchaseOrder?.id ? shoppingCart.purchaseOrder : purchaseOrderOption" *ngFor="let purchaseOrderOption of purchaseorders; trackBy: trackPurchaseOrderById">{{purchaseOrderOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_product">Product</label>
+            <select class="form-control" id="field_product" name="product" [(ngModel)]="shoppingCart.product">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="productOption.id === shoppingCart.product?.id ? shoppingCart.product : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+
+<div *ngIf="shoppingCart">
+    <h2><span>Shopping Cart</span> {{shoppingCart.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Quantity</span></dt>
+        <dd>
+            <span>{{shoppingCart.quantity}}</span>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+            <span>{{shoppingCart.price}}</span>
+        </dd>
+        <dt><span>Purchase Order</span></dt>
+        <dd>
+            <div *ngIf="shoppingCart.purchaseOrder">
+                <a [routerLink]="['/purchase-order', shoppingCart.purchaseOrder?.id]">{{shoppingCart.purchaseOrder?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Product</span></dt>
+        <dd>
+            <div *ngIf="shoppingCart.product">
+                <a [routerLink]="['/product', shoppingCart.product?.id]">{{shoppingCart.product?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'shopping-cart/'+ shoppingCart.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
